@@ -33,7 +33,7 @@ public class Main {
                     }
 
                     for (int i = 0; i < arrProdu.length; i++) {
-                        if  (produto.equals(arrProdu[i])) {
+                        if (produto.equals(arrProdu[i])) {
                             guardarIndice = i;
                             break;
                         }
@@ -49,10 +49,48 @@ public class Main {
 
                     float resultado = preco * quantidade;
                     total = resultado + total;
+
+                    System.out.println("O valor total da compra e " + total);
                 }
             }
             sc.close();
         }
     }
 
+    static int buscarItem(String arrProdu[], String produto) {
+        for (int i = 0; i < arrProdu.length; i++) {
+            if (produto.equals(arrProdu[i])) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static float calcularProdu(float precoUnita[]) {
+        float acumulador = 0;
+        for (int i = 0; i < precoUnita.length; i++) {
+        acumulador = precoUnita[i] + acumulador;
+    }
+       float media = acumulador / precoUnita.length;
+       return media;
+    }
+
+    static String[] filtraProdu(float precoUnita[], String[] arrProdu, float precoLimite) {
+        int contarProdu = 0;
+        int verificaFiltro = 0;
+        for (int i = 0; i < precoUnita.length; i++) {
+            if (precoUnita[i] < precoLimite) {
+                contarProdu++;
+            }
+        }
+
+        String[] produtosFiltrado = new String[contarProdu]; 
+        for (int i = 0; i < precoUnita.length; i++) {
+            if (precoUnita[i] < precoLimite) {
+                produtosFiltrado[verificaFiltro] = arrProdu[i];
+                 verificaFiltro++;
+            }
+        }
+        return produtosFiltrado;
+    }
 }
